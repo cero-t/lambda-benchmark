@@ -13,8 +13,14 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.DynamodbEvent;
 import com.amazonaws.services.lambda.runtime.events.DynamodbEvent.DynamodbStreamRecord;
 
-public class Main implements
+public class Main2 implements
         RequestHandler<DynamodbEvent, String> {
+    AmazonDynamoDBClient client;
+
+    public Main2() {
+        client = new AmazonDynamoDBClient(new EnvironmentVariableCredentialsProvider());
+        client.setRegion(Region.getRegion(Regions.AP_NORTHEAST_1));
+    }
 
     public String handleRequest(DynamodbEvent ddbEvent, Context context) {
         LambdaLogger logger = context.getLogger();
@@ -24,10 +30,7 @@ public class Main implements
             logger.log(record.getDynamodb().toString() + "\n");
         }
 
-        AmazonDynamoDBClient client = new AmazonDynamoDBClient(new EnvironmentVariableCredentialsProvider());
-        client.setRegion(Region.getRegion(Regions.AP_NORTHEAST_1));
         DynamoDB dynamoDB = new DynamoDB(client);
-
         Table table = dynamoDB.getTable("mytest");
         Item item = table.getItem("id", "test");
         logger.log("Item obtained: " + item);
