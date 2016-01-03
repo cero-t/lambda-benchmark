@@ -13,16 +13,13 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.DynamodbEvent;
 import com.amazonaws.services.lambda.runtime.events.DynamodbEvent.DynamodbStreamRecord;
 
-public class Main2 implements
+public class DynamoDB1 implements
         RequestHandler<DynamodbEvent, String> {
-    AmazonDynamoDBClient client;
-
-    public Main2() {
-        client = new AmazonDynamoDBClient(new EnvironmentVariableCredentialsProvider());
-        client.setRegion(Region.getRegion(Regions.AP_NORTHEAST_1));
-    }
 
     public String handleRequest(DynamodbEvent ddbEvent, Context context) {
+        AmazonDynamoDBClient client = new AmazonDynamoDBClient(new EnvironmentVariableCredentialsProvider());
+        client.setRegion(Region.getRegion(Regions.AP_NORTHEAST_1));
+
         LambdaLogger logger = context.getLogger();
         for (DynamodbStreamRecord record : ddbEvent.getRecords()) {
             logger.log(record.getEventID() + "\n");
