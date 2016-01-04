@@ -4,12 +4,6 @@ import com.amazonaws.services.lambda.runtime.Context;
 
 import java.io.InputStream;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Fib {
     public String myHandler(InputStream in, Context context) {
@@ -35,7 +29,6 @@ public class Fib {
     }
 
     public static void main(String[] args) {
-        Integer[] integerArray = {1, 62, 31, 1, 54, 31};
-        Stream.of(integerArray).forEach(String::valueOf);
+        new Fib().myHandler(null, null);
     }
 }
