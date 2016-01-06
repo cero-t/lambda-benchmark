@@ -1,12 +1,9 @@
 package cero.ninja.aws.bench;
 
-import com.amazonaws.services.lambda.runtime.Context;
-
-import java.io.InputStream;
 import java.math.BigDecimal;
 
 public class Fib {
-    public String myHandler(InputStream in, Context context) {
+    public String myHandler() {
         System.out.println("Start warming up");
         long sum = 0;
         sum += fib(38);
@@ -29,6 +26,6 @@ public class Fib {
     }
 
     public static void main(String[] args) {
-        new Fib().myHandler(null, null);
+        new Fib().myHandler();
     }
 }
